@@ -19,7 +19,7 @@ class ProductViewModel @Inject constructor(private val repository: ProductReposi
         fetchProducts()
     }
 
-    private fun fetchProducts() {
+    private fun getAllProducts() {
         viewModelScope.launch {
             try {
                 val products = repository.getProducts()
@@ -28,5 +28,9 @@ class ProductViewModel @Inject constructor(private val repository: ProductReposi
                 e.printStackTrace()
             }
         }
+    }
+
+  suspend fun getProductById(id: Int): Product {
+        return repository.getProductById(id)
     }
 }

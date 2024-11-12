@@ -8,4 +8,9 @@ class ProductRepository @Inject constructor(private val restDataSource: RestData
     suspend fun getProducts(): List<Product> {
         return restDataSource.getProducts()
     }
+
+    suspend fun getProductById(id: Int): Product {
+        return restDataSource.getProductById(id)
+    }
+
 }
