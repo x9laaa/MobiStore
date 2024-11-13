@@ -26,7 +26,7 @@ import coil.compose.AsyncImage
 
 @Composable
 fun ProductListView(viewModel: ProductViewModel) {
-    val products by viewModel.productState.collectAsState()
+    val products by viewModel.products.collectAsState(initial = emptyList())
 
     Scaffold(
         topBar = { AppBarView("MobiStore") }

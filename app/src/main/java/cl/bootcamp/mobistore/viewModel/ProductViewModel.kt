@@ -5,32 +5,27 @@ import androidx.lifecycle.viewModelScope
 import cl.bootcamp.mobistore.model.Product
 import cl.bootcamp.mobistore.repository.ProductRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ProductViewModel @Inject constructor(private val repository: ProductRepository) : ViewModel() {
-    private val _productState = MutableStateFlow<List<Product>>(emptyList())
-    val productState: StateFlow<List<Product>> = _productState
+class ProductViewModel @Inject constructor(
+    private val repository: ProductRepository
+) : ViewModel() {
+
+    val products: Flow<List<Product>> by lazy {
+        repository.getAllProductsRoom()
+    }
 
     init {
-        fetchProducts()
+        getAllApi()
     }
 
-    private fun getAllProducts() {
+
+    private fun getAllApi() {
         viewModelScope.launch {
-            try {
-                val products = repository.getProducts()
-                _productState.value = products
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
+            repository.getProducts()
         }
-    }
-
-  suspend fun getProductById(id: Int): Product {
-        return repository.getProductById(id)
     }
 }

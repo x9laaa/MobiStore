@@ -1,8 +1,13 @@
 package cl.bootcamp.mobistore.model
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "product")
 data class Product(
-    val id: Int,
-    val name: String,
-    val price: Int,
-    val image: String
+    @PrimaryKey(autoGenerate = true) val id: Int,
+    @ColumnInfo(name = "name") val name: String,
+    @ColumnInfo(name = "price") val price: Int,
+    @ColumnInfo(name = "image") val image: String
 )
