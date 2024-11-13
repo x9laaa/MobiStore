@@ -1,5 +1,6 @@
 package cl.bootcamp.mobistore.view
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,6 +19,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import cl.bootcamp.mobistore.components.AppBarView
 import cl.bootcamp.mobistore.model.Product
 import cl.bootcamp.mobistore.viewModel.ProductViewModel
@@ -25,7 +27,7 @@ import coil.compose.AsyncImage
 
 
 @Composable
-fun ProductListView(viewModel: ProductViewModel) {
+fun ProductListView(viewModel: ProductViewModel, navController: NavHostController) {
     val products by viewModel.products.collectAsState(initial = emptyList())
 
     Scaffold(
@@ -39,7 +41,7 @@ fun ProductListView(viewModel: ProductViewModel) {
                 .padding(16.dp)
         ) {
             items(products) { product ->
-                ProductCard(product)
+                ProductCard(product, navController)
             }
         }
     }
@@ -47,11 +49,14 @@ fun ProductListView(viewModel: ProductViewModel) {
 }
 
 @Composable
-fun ProductCard(product: Product) {
+fun ProductCard(product: Product, navController: NavHostController) {
     Card(
         modifier = Modifier
             .padding(vertical = 8.dp)
             .fillMaxWidth()
+            .clickable {
+                navController.navigate("productDetailView/${product.id}")
+            }
     ) {
         Column(
             modifier = Modifier.padding(16.dp)

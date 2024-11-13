@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import cl.bootcamp.mobistore.navigation.NavManager
 import cl.bootcamp.mobistore.ui.theme.MobiStoreTheme
 import cl.bootcamp.mobistore.view.ProductListView
 import cl.bootcamp.mobistore.viewModel.ProductViewModel
@@ -17,7 +18,7 @@ class MainActivity : ComponentActivity() {
         val viewModel: ProductViewModel by viewModels()
         setContent {
             MobiStoreTheme {
-                ProductListView(viewModel)
+                NavManager(viewModel)
             }
         }
     }
