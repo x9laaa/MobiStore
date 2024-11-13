@@ -84,9 +84,10 @@ fun ProductDetailView(viewModel: ProductViewModel, navController: NavHostControl
             Text(text = "Descripción: ${viewModel.state.description}", style = MaterialTheme.typography.bodyMedium)
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = if (viewModel.state.credit) "Acepta Crédito" else "Sólo Efectivo",
+                text = if (viewModel.state.credit) "Forma de Pago: Acepta Crédito" else "Forma de Pago: Sólo Efectivo",
                 style = MaterialTheme.typography.bodyMedium
             )
+
         }
     }
 }
