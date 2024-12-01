@@ -1,24 +1,32 @@
 package cl.bootcamp.mobistore
 
-import androidx.test.platform.app.InstrumentationRegistry
+import androidx.activity.compose.setContent
+import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import cl.bootcamp.mobistore.view.ProductListView
 
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-import org.junit.Assert.*
-
-/**
- * Instrumented test, which will execute on an Android device.
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
+@HiltAndroidTest
 @RunWith(AndroidJUnit4::class)
 class ExampleInstrumentedTest {
+
+    @get:Rule(order = 1)
+    var hiltTestRule = HiltAndroidRule(this)
+
+    @get:Rule(order = 2)
+    var composeTestRule = createAndroidComposeRule<MainActivity>()
+
     @Test
-    fun useAppContext() {
-        // Context of the app under test.
-        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("cl.bootcamp.mobistore", appContext.packageName)
+    fun verProductos() {
+        composeTestRule.activity.setContent {
+            ProductListView()
+        }
     }
+
+
 }

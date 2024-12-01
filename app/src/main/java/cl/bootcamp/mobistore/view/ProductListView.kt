@@ -19,6 +19,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import cl.bootcamp.mobistore.components.AppBarView
 import cl.bootcamp.mobistore.model.Product
@@ -27,7 +28,7 @@ import coil.compose.AsyncImage
 
 
 @Composable
-fun ProductListView(viewModel: ProductViewModel, navController: NavHostController) {
+fun ProductListView(viewModel: ProductViewModel = hiltViewModel(), navController: NavHostController) {
     val products by viewModel.products.collectAsState(initial = emptyList())
 
     Scaffold(
